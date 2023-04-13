@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redza Maulana Fajar-MI21B</title>
+
+    <style>
+        table,th,tr,td{
+            border: 1px solid;
+            padding: 10px;
+        }
+        thead{
+            text-align: center;
+            font-weight: 900;
+        }
+
+        .box1{
+margin: 80px;
+width:120px;
+height:230px;
+border:solid 3px black;
+text-align:left;
+}
+.box2{
+margin: 80px;
+width:120px;
+height:230px;
+border:solid 3px black;
+text-align:left;
+}
+.box3{
+margin: 80px;
+width:120px;
+height:230px;
+border:solid 3px black;
+text-align:left;
+}
+.btn{
+    background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+}
+    </style>
+</head>
+
+<body>
+    <h1>Bakso Japri</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, voluptatem rem vero ut nam debitis excepturi adipisci. Mollitia accusantium, libero illum obcaecati aspernatur dignissimos cum eius consequuntur laboriosam, voluptates veniam?</p>
+    <div class="container-fluid">
+        <form action="" method="post" id="form-input">
+            <p>Nama Pemesan : <input type="text" placeholder="Nama Lengkap" id="name" name="name"></p>
+            <div class="box">
+            <div class="box1">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" 
+                    <div class="card-body">
+                      <h5 class="card-title" style="margin: 10px;" id="order" value="Mie Bakso Halus"><b>Mie Bakso Halus</b></h5>
+                      <p class="card-text" style="margin: 10px;" id="price" value="10000">Rp. 10.000</p>
+                      <button type="submit" class="btn btn-primary" style="margin: 10px;" onclick="myFunction()">Pesan</button>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        
+    </form>
+    </div>
+    <div style="margin-top: 10px;">
+        <table>
+            <thead>
+                <tr>
+                    <td>No.</td>
+                    <td>Nama</td>                
+                    <td>Pesanan</td>
+                    <td>Jumlah</td>
+                    <td>Harga</td>
+                    <td>Total</td>
+                    <td>Aksi</td>
+                </tr>
+            </thead>
+            <tbody id="result"></tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const getData = async() => {
+            await axios.get(`http://localhost:3000/menu`)
+            .then((response) => {
+                let bucket = ``;
+                let menu = response.data;
+                for(let i = 0; i<menu.length; i++){
+                    bucket += `
+                    <tr>
+                        <td>${i+1}</td>
+                        <td>${menu[i].name}</td>
+                        <td>${menu[i].price}</td>
+                        <td>10000</td>
+                        <td><button onclick="deleteData('${menu[i].id}')">Delete</button></td>
+                    </tr>
+                    `
+                }
+                document.getElementById('result').innerHTML = bucket;
+            })
+            .catch((error) => {
+                console.log(error.message);
+                let bucket = `
+                <tr>
+                    <td colspan="4">${error.message}</td>
+                </tr>
+                `;
+                document.getElementById('result').innerHTML = bucket;
+            });
+        }
+        getData();
+    </script>
+</body>
+</html>
