@@ -1,0 +1,17 @@
+{
+    "menu": [
+      {
+        "name": "redza",
+        "price": "10000",
+        "id": 1
+      }],
+      "Order":[
+      {
+        "name": "redza",
+        "order": "Mie Bakso Halus",
+        "count": "1",
+        "price": "10000",
+        "id": 2
+      }
+      ]
+  }
